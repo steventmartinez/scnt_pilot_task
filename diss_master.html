@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>8.1.0</title>
+
+    <!-- Load jspsych plugins-->
+    <script src="jspsych_v8/dist/jspsych.js"></script>
+    <script src="jspsych_v8/dist/plugin-preload.js"></script>
+    <script src="jspsych_v8/dist/plugin-instructions.js"></script>
+    <script src="jspsych_v8/dist/plugin-html-button-response.js"></script>
+    <script src="jspsych_v8/dist/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych_v8/dist/plugin-audio-keyboard-response.js"></script>
+    <script src="jspsych_v8/dist/plugin-fullscreen.js"></script>
+    <script src="jspsych_v8/dist/plugin-browser-check.js"></script>
+    <script src="jspsych_v8/dist/plugin-survey-demo.js"></script>
+    <script src="jspsych_v8/dist/plugin-survey.js"></script>
+    <script src="jspsych_v8/dist/plugin-survey-likert.js"></script>
+    <script src="jspsych_v8/dist/plugin-survey-multi-choice.js"></script>
+    <script src="jspsych_v8/dist/plugin-survey-text.js"></script>
+
+    <!-- Load jspsych plugins-->
+    <script src="jspsych_v8/dist/utils.js"></script>
+
+    <!-- Load stimuli scripts -->
+    <script src="stimuli/JS stim/tiktok_stim.js"></script>
+    <script src="scripts/stim_randomization_conceptual_novelty.js"></script>
+    <script src="scripts/preload_stim.js"></script>
+
+    <!-- Load task scripts -->
+    <script src="scripts/scrolling_conceptual_novelty_task.js"></script>
+    <script src="scripts/MTES.js"></script>
+    <script src="scripts/IUS.js"></script>
+    <script src="scripts/ADEXI.js"></script>
+    <script src="scripts/BIS_8.js"></script>
+    <script src="scripts/SSS.js"></script>
+
+
+    <!-- Load jspsych's default CSS styling script (which handles aesthetics) and the jspsychSurvey stlying script -->
+    <link href="jspsych_v8/dist/jspsych.css" rel="stylesheet" type="text/css" />
+    <link href="jspsych_v8/dist/survey.css" rel="stylesheet" type="text/css" />
+    
+<style>
+
+/*jsPsych background color*/
+  body {
+background-color:#FFFFFF;
+}
+
+/*Padding for text*/
+.custom_padding {
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+/*Indiviual video container*/
+.video-container {
+  object-fit: cover;
+  width: 35vw;
+  height: 100vh;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+	}
+
+/*Slide videos up*/
+.slide-up {
+    animation: slideUp 0.8s forwards;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/*Slide videos down*/
+.slide-down {
+    animation: slideDown .8s forwards;
+}
+@keyframes slideDown {
+            from { transform: translateY(-100%); }
+        }
+
+.blur-fade-glow {
+  opacity: 0.3;
+  filter: blur(20px);
+  animation: blurFadeGlow 10.5s ease-out forwards;
+}
+
+@keyframes blurFadeGlow {
+  0% {
+    opacity: 0.3;
+    filter: blur(20px);
+  }
+  71.4% { /* 5s mark */
+    opacity: 1;
+    filter: blur(0px) drop-shadow(0 0 0px transparent);
+  }
+  85.7% { /* ~6s mark */
+    filter: blur(0px) drop-shadow(0 0 20px #00FFFF) drop-shadow(0 0 40px #00FFFF) drop-shadow(0 0 60px #00BFFF);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px) drop-shadow(0 0 0px transparent);
+  }
+}
+
+
+</style>
+  
+</head>
+<body>
+</body>
+<script>
+
+//------------------------------------//
+// Initialize jsPsych
+//------------------------------------//
+// var jsPsych = initJsPsych({
+//   on_finish: function() {
+//     // Add interactions to the data variable
+//     var interaction_data = jsPsych.data.getInteractionData();
+//     jsPsych.data.get().addToLast({interactions: interaction_data.json()});
+//     jsPsych.data.displayData()
+//     }
+// })
+
+function startExp() {}
+var jsPsych = initJsPsych({
+    on_finish: function() {
+        var csv = jsPsych.data.get().csv();
+        var filename = jsPsych.data.get().values()[0].initials + ".csv";
+        downloadCSV(csv, filename);
+        jsPsych.data.displayData()
+    }
+})
+
+
+//------------------------------------//
+// Initialize jsPsych Timeline
+//------------------------------------//
+var timeline = [];
+
+
+//------------------------------------//
+// TOGGLE PAVLOVIA ON/OFF
+//------------------------------------//
+var pav = false
+
+
+
+//------------------------------------//
+// Capture Prolific Info
+//------------------------------------//
+// var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+// var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+// var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+
+// console.log(subject_id)
+// console.log(study_id)
+// console.log(session_id)
+
+
+
+//------------------------------------//
+// TAG PROLIFIC DATA
+//------------------------------------//
+// jsPsych.data.addProperties({
+//   script_name: "dissertation_master",
+//   subject_id: subject_id,
+//   study_id: study_id,
+//   session_id: session_id
+// });
+
+
+
+//------------------------------------//
+// INITIALIZE PAVLOVIA CONNECTION
+//------------------------------------//
+ if (pav) { 
+    var pavlovia_init = { 
+    data: {
+        trial_id: "pavlovia_init"
+    },
+      type: jsPsychPavlovia, 
+      command: "init" 
+    }; 
+  timeline.push(pavlovia_init);
+  };
+
+
+
+//------------------------------------//
+// BROWSER CHECK
+//------------------------------------//
+timeline.push ({
+    data: {
+        trial_id: "browser_check"
+    },
+    type: jsPsychBrowserCheck
+  });
+
+
+//------------------------------------//
+// FULL SCREEN
+//------------------------------------//
+timeline.push({
+    data: {
+        trial_id: "full_screen"
+    },
+    type: jsPsychFullscreen,
+    fullscreen_mode: true
+});
+
+
+//------------------------------------//
+// PRELOAD STIMULI
+//------------------------------------//
+timeline.push(preload_aesthetics)
+timeline.push(preload_videos)
+
+
+
+//------------------------------------//
+// Welcome
+//------------------------------------//
+var welcome = {
+  on_start: function() {
+    document.body.style.backgroundColor = '#F0F0F0'
+},
+    data: {
+        trial_id: "Welcome"
+    },
+    type: jsPsychInstructions,
+    pages: function(){
+    pageOne = "<p><div style ='font-size:2.8vw;'><b>Welcome to the study!</b></div></p>" +
+        "<p><div style ='font-size:2.4vw;'>Before the study begins, you will review the study consent forms and</div></p>" + 
+        "<p><div style ='font-size:2.4vw;'>learn more about what the study will involve. After reviewing the consent forms,</div></p>" + 
+        "<p><div style ='font-size:2.4vw;'>you will be asked to indicate if you consent or decline to participate in the study.</div></p>" +
+        "<p><div style ='font-size:2.4vw;'>Press <b>Next</b> to begin.</div></p>"
+    return [pageOne]
+    },
+    button_label_next: "Next",
+    show_clickable_nav: true,
+    css_classes: ['instructions_line_height'],
+    }
+
+
+
+//------------------------------------//
+// Consent Forms
+//------------------------------------//
+/*Show consent forms -- 1*/
+var consent_forms1 = {
+  on_start: function() {
+    document.body.style.backgroundColor = '#F0F0F0'
+},
+    data: {
+        trial_id: "consent_forms1"
+    },
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<p><img src="32182 consent forms/consent_online_32182_page1.png" style= "height: 80vh; width: 35vw; position:fixed; left: 10vw; top: 3vh;"></img></p>' +
+      '<p><img src="32182 consent forms/consent_online_32182_page2.png" style= "height: 80vh; width: 35vw; position:fixed; right: 10vw; top: 4vh;"></img></p>',
+    choices: ["<p style ='font-size: 1.8vw; color: black; position:fixed; left: 47vw; bottom: .7vh;'><b>Next</b></p>"],
+    button_html: (choice) => {
+      return `<button class="jspsych-btn" style="width: 7vw; height: 6vh; position: fixed; left: 45vw; bottom: 2vh;">${choice}</button>`
+      },
+    };
+
+
+
+/*Show consent forms -- 2*/
+var consent_forms2 = {
+  on_start: function() {
+    document.body.style.backgroundColor = '#F0F0F0'
+},
+    data: {
+        trial_id: "consent_forms2"
+    },
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<p><img src="32182 consent forms/consent_online_32182_page3.png" style= "height: 80vh; width: 35vw; position:fixed; left: 10vw; top: 3vh;"></img></p>' +
+      '<p><img src="32182 consent forms/consent_online_32182_page4.png" style= "height: 80vh; width: 35vw; position:fixed; right: 10vw; top: 4vh;"></img></p>',
+      choices: ["<p style ='font-size:1.5vw; position: fixed; left: 31.5vw; bottom: 3vh;'><b>Consent to participate</b></p>", "<p style ='font-size: 1.5vw;position: fixed; right: 31.7vw; bottom: 3vh'><b>Decline to participate</b></p>"],
+      button_html: (choice) => {
+        return `<button class="jspsych-btn" style="width: 19vw; height: 8vh; position: relative; top: 41.7vh;">${choice}</button>`
+        },
+  on_finish: function(data){
+	if(data.response == 1){
+		jsPsych.abortExperiment('<p>You did not consent to participate. The session will now finish. Thank you for your time!</p>' +
+        '<p><a href="https://app.prolific.com/submissions/complete?cc=CFJI1SHN">Click here to return to Prolific and complete the study</a>.</p>');
+	}
+}
+    };
+
+
+
+//------------------------------------//
+// The experiment will begin
+//------------------------------------//
+var begin_experiment = {
+  on_start: function() {
+    document.body.style.backgroundColor = '#F0F0F0'
+},
+    data: {
+        trial_id: "begin_experiment"
+    },
+    type: jsPsychInstructions,
+    pages: function(){
+    pageOne = "<p><div style ='font-size:2.8vw;'><b>Thank you for agreeing to participate.</b></div></p>" +
+        "<p><div style ='font-size:2.4vw;'>The experiment will now begin.</div></p>" 
+    return [pageOne]
+    },
+    button_label_next: "Next",
+    show_clickable_nav: true,
+    css_classes: ['instructions_line_height'],
+    }
+
+
+
+//------------------------------------//
+// Demographics
+//------------------------------------//
+  var demographics = {
+    type: jsPsychSurveyDemo
+  }
+
+
+//------------------------------------//
+// Organize consenting procedure
+//------------------------------------//
+var consenting_procedure = {
+    timeline: [welcome, consent_forms1, consent_forms2, begin_experiment, demographics],
+}
+
+
+
+
+
+
+//------------------------------------//
+// CONCATENATE TIMELINES
+//------------------------------------//
+// timeline = timeline.concat(consenting_procedure); // Consenting procedure
+timeline = timeline.concat(conceptual_novelty_task); // Conceptual novelty task
+// timeline = timeline.concat(IUS_procedure); // IUS
+// timeline = timeline.concat(ADEXI_procedure); // ADEXI
+// timeline = timeline.concat(BIS_8_procedure); // BIS_8
+// timeline = timeline.concat(SSS_procedure); // Zuckerberg Sensation Seeking Scale
+// timeline = timeline.concat(MTES_procedure); // MTES
+
+
+
+
+
+
+
+//------------------------------------//
+// Task Conclusion
+//------------------------------------//
+var final_trial_note = {
+    data: {
+        trial_id: "final_trial_note"
+    },
+    type: jsPsychInstructions,
+    pages: function(){
+    pageOne = '<img src="study_design_images/100_percent_progress.png" style="height: 11.5vh; width: 32vw;"></img>' +
+        "<p><div style ='font-size:40px;'>The experiment is now complete!</div></p>" +
+        "<p><div style ='font-size:40px;'>In the next screen, your data will be saved and you will be redirected back to the Prolific page.</div></p>" + 
+        "<p><div style ='font-size:40px;'>Press <b>Next</b> to finish the experiment.</div></p>"
+    return [pageOne]
+    },
+    button_label_next: "Next",
+    show_clickable_nav: true,
+    css_classes: ['instructions_line_height', 'custom_padding'],
+    }
+
+// timeline.push(final_trial_note)
+
+
+//------------------------------------//
+// TERMINATE PAVLOVIA CONNECTION AND FINISH EXPERIMENT
+//------------------------------------//
+/* finish connection with pavlovia.org */
+if (pav) { 
+  var pavlovia_finish = {
+      type: jsPsychPavlovia,
+      command: "finish",
+      on_finish: function (){
+                  document.body.innerHTML = '<p>Please wait. You will be redirected back to Prolific in a few moments. If you get a pop-up warning that says "data may not be saved", you can click "leave", your data has already been saved.</p>';
+                  setTimeout(function () {
+                    location.href = "https://app.prolific.com/submissions/complete?cc=CFJI1SHN";
+                    document.body.innerHTML ='<p>If you are not automatically redirected, please click here: <a href="https://app.prolific.com/submissions/complete?cc=CFJI1SHN">https://app.prolific.com/submissions/complete?cc=CFJI1SHN</a></p>'
+                    '<p>If you get a pop-up warning that says "data may not be saved", you can click "leave", your data has already been saved.</p>';
+                  }, 5000);
+                }
+      };
+      timeline.push(pavlovia_finish);
+    }
+
+
+
+
+//------------------------------------//
+// Run the experiment
+//------------------------------------//
+  jsPsych.run(timeline);
+
+  </script>
+</html>
+
