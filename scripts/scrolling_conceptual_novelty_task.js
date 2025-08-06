@@ -87,8 +87,8 @@ var video_platform_instructions = {
     type: jsPsychInstructions,
     pages: function(){
     let pageOne = 
-    "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>This experiment will involve watching videos like you normally would on social media applications.</div></p>" +
-    "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>For this experiment, we created a video platform that shows you videos, just like TikTok and YouTube Shorts.</div></p>" +
+    "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>This experiment will involve watching videos like you normally would on social media.</div></p>" +
+    "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>For the purpose of this experiment, we created a video platform that shows you videos, just like TikTok and YouTube Shorts.</div></p>" +
     '<img src="study_design_aesthetics/social_media_logo.png" <div style= "width: 17vw; height: 26vh; margin-bottom: 2vh;"></img>' +
     "<p><div style ='line-height: 1.25; font-size:2.7vw;'>Press <b>Next</b> to learn about how the video platform works.</div></p>"
 
@@ -99,7 +99,7 @@ var video_platform_instructions = {
     let pageThree = 
     "<p><div style='line-height: 1.35; font-size: 2.5vw;'>The platform will show you one video at a time.</div></p>" +
     "<p><div style ='line-height: 1.35; font-size:2.5vw;'>To skip to the next video, you can press the <b>Skip</b> <img src='study_design_aesthetics/skip_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
-    "<p><div style ='line-height: 1.35; font-size:2.5vw; margin-bottom: 3vh;'>To exit and start watching a new feed of videos, you can press the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
+    "<p><div style ='line-height: 1.35; font-size:2.5vw; margin-bottom: 3vh;'>To exit the current feed of videos and start watching a new feed of videos, you can press the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
     `<img src="study_design_aesthetics/video_platform_example_skip_exit.png" <div style= "width: 39vw; height: 58vh; margin-bottom: 2vh;"></img>`
 
     let pageFour = 
@@ -109,12 +109,14 @@ var video_platform_instructions = {
     "<p><div style ='line-height: 1.35; font-size:2.7vw;'>or exit the current feed of videos and start watching a new feed of videos using the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>"
 
     let pageFive = 
-    "<p><div style='line-height: 1.55; font-size: 2.7vw;'>Some video feeds will show you varied content from a mix of different categories, while other video feeds will be more limited.</div></p>"
+    "<p><div style='line-height: 1.55; font-size: 2.7vw;'>Some video feeds will show you varied content from a mix of different categories, while other video feeds will be more limited.</div></p>" +
+    "<p><div style='line-height: 1.55; font-size: 2.7vw;'>Importantly, there will be no penalty for whether you watch a video fully, skip a video, or exit the current video feed.</div></p>" +
+    "<p><div style='line-height: 1.55; font-size: 2.7vw;'>Again, please watch the videos as you normally would in real life.</div></p>"
 
     let pageSix = 
     "<p><div style='line-height: 1.35; font-size: 2.7vw; margin-bottom:4vh;'>To learn how to use the video platform, we will do <b>two rounds of practice</b>.</div></p>" +
     "<p><div style ='line-height: 1.35; font-size:2.7vw; margin-bottom:4vh;'>In this first practice round, let's practice using the <b>Skip</b> <img src='study_design_aesthetics/skip_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
-    "<p><div style ='line-height: 1.35; font-size:2.7vw; margin-bottom:4vh;'>Please watch each video as you normally would and if you want to skip to the next video, press the <b>Skip</b> <img src='study_design_aesthetics/skip_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
+    "<p><div style ='line-height: 1.35; font-size:2.7vw; margin-bottom:4vh;'>Please watch the videos as you normally would and if you want to skip to the next video, press the <b>Skip</b> <img src='study_design_aesthetics/skip_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
     "<p><div style='line-height: 1.35; font-size: 2.7vw; margin-bottom:4vh;'>The <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button will be disabled in this practice round.</div></p>" +
     "<p><div style='line-height: 1.35; font-size: 2.7vw; margin-bottom:4vh;'>Press <b>Next</b> when you are ready to start the first round of practice.</div></p>"
 
@@ -327,7 +329,7 @@ var instructions_practice_second_round = {
     let pageOne = 
     "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>Great job!</div></p>" +
     "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom: 4vh;'>In this next round of practice, you will practice using the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
-    "<p><div style ='line-height: 1.45; font-size:2.7vw; margin-bottom:4vh;'>Please watch each video as you normally would and if you want to exit the current feed of videos and start a new feed of videos, press the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
+    "<p><div style ='line-height: 1.45; font-size:2.7vw; margin-bottom:4vh;'>Please watch the videos as you normally would and if you want to exit the current feed of videos and start a new feed of videos, press the <b>Exit</b> <img src='study_design_aesthetics/exit_door_person_button_instructions.png' style='height: 1em; vertical-align: middle;'> button.</div></p>" +
     "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom:4vh;'>The <b>Skip</b> <img src='study_design_aesthetics/skip_button_instructions.png' style='height: 1em; vertical-align: middle;'> button will be disabled in this practice round.</div></p>" +
     "<p><div style='line-height: 1.45; font-size: 2.7vw; margin-bottom:4vh;'>Press <b>Next</b> when you are ready to start the second round of practice.</div></p>"
 
@@ -615,7 +617,7 @@ var start_video_platform = {
   },
   type: jsPsychHtmlButtonResponse,
   stimulus: "<p><div style='line-height: 1.55; font-size: 2.5vw;'>The experiment will now begin.</div></p>" +
-  "<p><div style='line-height: 1.25; font-size: 2.5vw; margin-bottom: 40vh;'>When you are ready to begin, press the button to launch the platform.</div></p>",
+  "<p><div style='line-height: 1.25; font-size: 2.5vw; margin-bottom: 40vh;'>When you are ready to start, press the button to launch the platform.</div></p>",
   choices: ['study_design_aesthetics/social_media_logo.png'],
   button_html: (choice) => {
 return `<div style = "cursor: pointer; position:fixed; left: 41vw; bottom: 30vh"><img id="${choice}" src="${choice}" style="width: 17vw; height: 26vh; display: block; margin: 0 auto;"></button>`  },
@@ -1885,6 +1887,6 @@ var conclusion = {
 // Organize Conceptual Novelty Task
 //------------------------------------//
 var conceptual_novelty_task = {
-    // timeline: [practice_procedure]
+    // timeline: [exp_procedure]
     timeline: [welcome, video_platform_instructions, practice_procedure, start_video_platform, video_platform_loading, exp_procedure, conclusion]
 };
